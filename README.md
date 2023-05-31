@@ -1,5 +1,5 @@
 # Job Finder
-Projeto feito no curso de Javascript na Udemy<br>
-Projeto Job Finder com Node, Express, Sequelize, Handlebars<br>
+Projeto Fullstack feito no curso de Javascript na Udemy<br>
+Job Finder com Node, Express, Sequelize, Handlebars<br>
 Utilização de  banco de dados SQlite com Postman<br>
-Projeto feito na plataforma Udemy com professor Matheus Battisti<br>
+Feito na plataforma Udemy com professor Matheus Battisti.<br>
