@@ -5,6 +5,9 @@ const path       = require('path');
 const PORT       = 3000;
 const db         = require('./db/connection');
 const bodyParser = require('body-parser');
+const Job        = require('./models/Job');
+const Sequelize  = require('sequelize');
+const Op         = Sequelize.Op;
 
 app.listen(PORT, function(){
     console.log(`O Express está rodando na porta ${PORT}`);
@@ -34,7 +37,34 @@ db
 
 // routes
 app.get('/', (req, res) => {
-    res.render('index');
+
+    let search = req.query.job;
+    let query = '%'+search+'%'; // PH -> PHP, Word -> Wordpress, press -> Wordpress...
+    if(!search){
+         Job.findAll({order:[
+            ['createdAt', 'DESC']
+        ]})
+        .then(jobs => {
+    
+            res.render('index', {
+                jobs
+            });
+        })
+        .catch(err => console.log(err));
+    } else {
+        Job.findAll({
+            where: { title: { [Op.like]: '%' + search + '%' } },
+            order:[
+            ['createdAt', 'DESC']
+        ]})
+        .then(jobs => {
+    
+            res.render('index', {
+                jobs, search
+            });
+        })
+        .catch(err => console.log(err));
+    }
 });
 
 // jobs routes
